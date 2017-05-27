@@ -11,11 +11,11 @@
 <form method="post" th:if="${cheeses} and ${cheeses.size()}">
 <table>
     <tr th:each="cheese : ${cheeses}">
-        <td th:text="${cheese.key}"></td>
-        <td th:text="${cheese.value}"></td>
-        <td><input type="checkbox" name="cheese" th:value="${cheese.key}">Delete?</input></td>
+        <td th:text="${cheese.cheeseName}"></td>
+        <td th:text="${cheese.cheeseDescription}"></td>
+        <td><input type="checkbox" name="cheese" th:value="${cheese.cheeseName}">Delete?</input></td>
     </tr>
-</table>
+</table><br></br>
     <input type="submit" value="Remove cheeses" />
 </form>
 

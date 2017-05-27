@@ -4,12 +4,12 @@
 <body>
     <h1 th:text="${title}">Default Title</h1>
 
-    <nav th:replace="fragments :: navigation"></nav>
+    <nav th:replace="fragments :: navigation"></nav><br></br>
 
     <p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
 
     <table>
-        <tr th:each="cheese : ${cheeses}"><td th:text="${cheese.key}"></td><td th:text="${cheese.value}"></td></tr>
+        <tr th:each="cheese : ${cheeses}"><td th:text="${cheese.cheeseName}"></td><td th:text="${cheese.cheeseDescription}"></td></tr>
     </table>
 
 </body>
