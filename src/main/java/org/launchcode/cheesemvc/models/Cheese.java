@@ -8,25 +8,25 @@ public class Cheese {
     private String cheeseName;
     private String cheeseDescription;
 
-    public Cheese(String aCheeseName, String aCheeseDescription){
-        setCheeseName(aCheeseName);
-        setCheeseDescription(aCheeseDescription);
+    public Cheese(String cheeseName, String cheeseDescription){
+        this.cheeseName = cheeseName;
+        this.cheeseDescription = cheeseDescription;
     }
 
-    public String getCheeseName() {
-        return cheeseName;
+    public String getCheeseName(){
+        return this.cheeseName;
     }
 
-    public void setCheeseName(String aCheeseName) {
-        cheeseName = aCheeseName;
+    public void setCheeseName(String cheeseName) {
+        this.cheeseName = cheeseName;
     }
 
     public String getCheeseDescription() {
-        return cheeseDescription;
+        return this.cheeseDescription;
     }
 
-    public void setCheeseDescription(String aCheeseDescription) {
-        cheeseDescription = aCheeseDescription;
+    public void setCheeseDescription(String cheeseDescription) {
+        this.cheeseDescription = cheeseDescription;
     }
 
 }

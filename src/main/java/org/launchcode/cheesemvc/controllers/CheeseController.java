@@ -55,18 +55,6 @@ public class CheeseController {
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public String processDeleteCheeseForm(@RequestParam ArrayList<String> cheese){
- /*
-        for(String c : cheese) {
-            for(Cheese aCheese : cheeses) {
-                String iName = aCheese.getCheeseName();
-                if (iName.equals(c)) {
-                    cheeses.remove(aCheese);
-                }
-            }
-        }
-*/
-        //New code using iterator starts here
-
 
         for(String c : cheese){
             Iterator itr = cheeses.iterator();
@@ -79,10 +67,6 @@ public class CheeseController {
                 }
             }
         }
-                //New code for iterator ends here
-
-
-
         // Redirect to /cheese
         return "redirect:";
     }
