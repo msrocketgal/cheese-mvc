@@ -7,10 +7,18 @@ public class Cheese {
 
     private String cheeseName;
     private String cheeseDescription;
+    private int cheeseID;
+    private static int nextID = 1;
 
     public Cheese(String cheeseName, String cheeseDescription){
+        this();
         this.cheeseName = cheeseName;
         this.cheeseDescription = cheeseDescription;
+    }
+
+    public Cheese(){
+        this.cheeseID = nextID;
+        nextID++;
     }
 
     public String getCheeseName(){
@@ -29,4 +37,11 @@ public class Cheese {
         this.cheeseDescription = cheeseDescription;
     }
 
+    public int getCheeseID() {
+        return cheeseID;
+    }
+
+    public void setCheeseID(int cheeseID) {
+        this.cheeseID = cheeseID;
+    }
 }
