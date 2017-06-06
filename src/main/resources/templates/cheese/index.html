@@ -13,9 +13,14 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Click to Edit</th>
         </tr>
 
-        <tr th:each="cheese : ${cheeses}"><td th:text="${cheese.cheeseName}"></td><td th:text="${cheese.cheeseDescription}"></td></tr>
+        <tr th:each="cheese : ${cheeses}">
+            <td th:text="${cheese.cheeseName}"></td>
+            <td th:text="${cheese.cheeseDescription}"></td>
+            <td><a th:href="@{'/cheese/edit/' + ${cheese.cheeseID}}">edit</a></td>
+        </tr>
 
     </table>
 

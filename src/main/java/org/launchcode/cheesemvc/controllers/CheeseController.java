@@ -4,10 +4,7 @@ import org.launchcode.cheesemvc.models.Cheese;
 import org.launchcode.cheesemvc.models.CheeseData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -56,6 +53,22 @@ public class CheeseController {
             CheeseData.delete(cheeseID);
         }
         // Redirect to /cheese
+        return "redirect:";
+    }
+
+    //Create a method to display the form with this signature:
+    @RequestMapping(value = "edit/{cheeseID}", method = RequestMethod.GET)
+    public String displayEditForm(Model model, @PathVariable int cheeseID){
+        model.addAttribute("cheese", CheeseData.getByID(cheeseID));
+        return "cheese/edit";
+    }
+
+    //Create a method to process the form with this signature:
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public String processEditForm(int cheeseID, String cheeseName, String cheeseDescription){
+        Cheese cheeseToEdit = CheeseData.getByID(cheeseID);
+        cheeseToEdit.setCheeseName(cheeseName);
+        cheeseToEdit.setCheeseDescription(cheeseDescription);
         return "redirect:";
     }
 }
