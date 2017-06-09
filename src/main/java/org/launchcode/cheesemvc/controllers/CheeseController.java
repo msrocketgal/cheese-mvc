@@ -89,6 +89,7 @@ public class CheeseController {
         cheese.setCheeseName(newCheese.getCheeseName());
         cheese.setCheeseDescription(newCheese.getCheeseDescription());
         cheese.setType(newCheese.getType());
+        cheese.setRating(newCheese.getRating());
         return "redirect:";
     }
 }
