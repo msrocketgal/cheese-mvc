@@ -1,16 +1,15 @@
 package org.launchcode.cheesemvc.controllers;
 
 import org.launchcode.cheesemvc.models.Cheese;
-import org.launchcode.cheesemvc.models.CheeseData;
 import org.launchcode.cheesemvc.models.CheeseType;
+import org.launchcode.cheesemvc.models.data.CheeseDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by msroc on 5/17/2017.
@@ -19,11 +18,14 @@ import java.util.Iterator;
 @RequestMapping(value = "cheese")
 public class CheeseController {
 
+    @Autowired
+    private CheeseDao cheeseDao;
+
     // Request path: /cheese
     @RequestMapping(value = "")
     public String index(Model model){
 
-        model.addAttribute("cheeses", CheeseData.getAll());
+        model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", "My Cheeses");
         return "cheese/index";
     }
@@ -43,13 +45,13 @@ public class CheeseController {
             model.addAttribute("title", "Add Cheese");
             return "cheese/add";
         }
-        CheeseData.add(newCheese);
+        cheeseDao.save(newCheese);
         return "redirect:";
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.GET)
     public String displayDeleteCheeseForm(Model model){
-        model.addAttribute("cheeses", CheeseData.getAll());
+        model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", "Remove Cheese");
         return "cheese/delete";
     }
@@ -58,7 +60,7 @@ public class CheeseController {
     public String processDeleteCheeseForm(@RequestParam int[] cheeseIDs){
 
         for(int cheeseID : cheeseIDs){
-            CheeseData.delete(cheeseID);
+            cheeseDao.delete(cheeseID);
         }
         // Redirect to /cheese
         return "redirect:";
@@ -67,7 +69,7 @@ public class CheeseController {
     //Create a method to display the form with this signature:
     @RequestMapping(value = "edit/{cheeseID}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int cheeseID){
-        Cheese cheese = CheeseData.getByID(cheeseID);
+        Cheese cheese = cheeseDao.findOne(cheeseID);
         model.addAttribute("cheese", cheese);
         model.addAttribute("cheeseTypes", CheeseType.values());
         model.addAttribute("title", "Edit Cheese " + cheese.getCheeseName());
@@ -85,7 +87,7 @@ public class CheeseController {
             return "cheese/edit";
         }
 
-        Cheese cheese = CheeseData.getByID(newCheese.getCheeseID());
+        Cheese cheese = cheeseDao.findOne(newCheese.getId());
         cheese.setCheeseName(newCheese.getCheeseName());
         cheese.setCheeseDescription(newCheese.getCheeseDescription());
         cheese.setType(newCheese.getType());
